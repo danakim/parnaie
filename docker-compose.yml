@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  website:
+    build: .
+    command: >
+      gunicorn -b 0.0.0.0:8000
+        --access-logfile -
+        --reload
+        "parnaie.app:create_app()"
+    environment:
+      PYTHONUNBUFFERED: 'true'
+    volumes:
+      - '.:/parnaie'
+    ports:
+      - '8000:8000'
+  redis:
+    image: redis:3-alpine
+    ports:
+      - '6379:6379'
