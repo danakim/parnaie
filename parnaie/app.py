@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, send_from_directory
 import redis
 import sys
 reload(sys)
@@ -25,5 +25,9 @@ def create_app():
         word=word,
         definition=definition
         )
+
+    @app.route('/assets/<path:path>')
+    def send_assets(path):
+        return send_from_directory('assets', path)
 
     return app

@@ -1,8 +1,74 @@
+<!DOCTYPE html>
 <html>
-<body>
-{{ word }}</br>
-{{ definition }}</br>
-</br>
-<input type="button" value="Expresie noua" onClick="window.location.reload()">
-</body>
+    <head>
+        <meta charset='utf-8'>
+        <style>
+            @font-face {
+                font-family: sharpsans;
+                src: url(/assets/sharp-sans.ttf);
+            }
+            #word {
+                width: 50%;
+                margin: auto;
+                left: 1%;
+                right: 1%;
+                position: absolute;
+                margin-top: 180px;
+                font-family: sharpsans;
+                font-variant: small-caps;
+                font-weight: bold;
+                font-size: 3.7em;
+                letter-spacing: 2px;
+            }
+            #definition {
+                width: 50%;
+                margin: auto;
+                left: 1%;
+                right: 1%;
+                position: absolute;
+                margin-top: 14em;
+                font-family: sharpsans;
+                font-style: oblique;
+                font-size: 1.5em;
+                letter-spacing: 1px;
+            }
+            #footer {
+                position:fixed;
+                bottom:0;
+                left:1%;
+                right:0;
+                height:30px;
+                font-family: sharpsans;
+                font-size: 0.8em;
+                font-variant: small-caps;
+                letter-spacing: 1px;
+            }
+            .button {
+                background-color: #ff9900;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-family: sharpsans;
+                font-size: 1em;
+                margin: 4px 2px;
+                cursor: pointer;
+                margin-top: 9%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="word">
+            {{ word }}</br>
+        </div>
+        <div id="definition">
+            {{ definition }}</br>
+            </br><input type="button" class="button "value="Mai dă-mi una" onClick="window.location.reload()">
+        </div>
+        <div id="footer">
+            <a href=https://www.google.ro/search?newwindow=1&dcr=0&ei=x3K2WuzGIc-lwQLt05iIDw&q=viorel+horea+tantas+dictionar+de+puscarie&oq=viorel+horea+tantas+dictionar+de+puscarie target="_blank">Sursă</a>
+        </div>
+    </body>
 </html>
