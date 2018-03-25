@@ -7,6 +7,8 @@ Sursa: cartea lui Viorel Horea Tantas - "Dictionar de puscarie"
 
 Bazata pe Flask, Redis si Docker
 
-Poate fi pornita cu:
+Poate fi pornita cu: `docker-compose up`
 
-`docker-compose up`
+Baza de date poate fi populata cu:
+
+`cd data && ./split-data.sh && ./insert-data.sh`
