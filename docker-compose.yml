@@ -18,3 +18,8 @@ services:
     image: redis:3-alpine
     ports:
       - '6379:6379'
+    volumes:
+      - 'parnaie-redis-data:/data'
+
+volumes:
+  parnaie-redis-data:
