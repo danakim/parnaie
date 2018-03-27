@@ -7,13 +7,15 @@
                 font-family: sharpsans;
                 src: url(/assets/sharp-sans.ttf);
             }
-            #word {
+            #container {
                 width: 50%;
                 margin: auto;
                 left: 1%;
                 right: 1%;
                 position: absolute;
-                margin-top: 180px;
+                margin-top: 5%;
+            }
+            #word {
                 font-family: sharpsans;
                 font-variant: small-caps;
                 font-weight: bold;
@@ -21,12 +23,6 @@
                 letter-spacing: 2px;
             }
             #definition {
-                width: 50%;
-                margin: auto;
-                left: 1%;
-                right: 1%;
-                position: absolute;
-                margin-top: 14em;
                 font-family: sharpsans;
                 font-style: oblique;
                 font-size: 1.5em;
@@ -55,16 +51,14 @@
                 font-size: 1em;
                 margin: 4px 2px;
                 cursor: pointer;
-                margin-top: 9%;
+                margin-top: 5%;
             }
         </style>
     </head>
     <body>
-        <div id="word">
-            {{ word }}</br>
-        </div>
-        <div id="definition">
-            {{ definition }}</br>
+        <div id="container">
+            <p id="word">{{ word }}</p></br>
+            <p id="definition">{{ definition }}</p></br>
             </br><input type="button" class="button "value="Mai dă-mi una" onClick="window.location.reload()">
         </div>
         <div id="footer">
