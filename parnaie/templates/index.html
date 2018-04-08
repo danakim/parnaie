@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Dicționar de pușcărie</title>
-        <meta name="description" content="Dicționar cu expresii folosite în închisoare">
-        <meta name="keywords" content="dicționar, dictionar, pușcărie, puscarie, inchisoare, închisoare, parnaie, pârnaie, zdub, bulau">
-        <meta charset='utf-8'>
+<head>
+    <title>Dicționar de pușcărie</title>
+    <meta name="description" content="Dicționar cu expresii folosite în închisoare">
+    <meta name="keywords" content="dicționar, dictionar, pușcărie, puscarie, inchisoare, închisoare, parnaie, pârnaie, zdub, bulau">
+    <meta charset='utf-8'>
 
-        <!-- STYLES -->
-        <link href="assets/styles.css" type="text/css" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans" rel="stylesheet">
+    <!-- STYLES -->
+    <link href="assets/styles.css" type="text/css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans" rel="stylesheet">
 
-        <!-- ANALYTICS -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116477612-1"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'UA-116477612-1');
-        </script>
-    </head>
-    <body>
+    <!-- ANALYTICS -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116477612-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-116477612-1');
+    </script>
+</head>
+<body>
 
-        <!--  PAGE CONTENT -->
-        <div id="stripe-holder">
+    <!--  PAGE CONTENT -->
+    <div id="stripe-holder">
+        <div class="wrapper">
             <div class="stripe"></div>
             <div class="stripe"></div>
             <div class="stripe"></div>
@@ -35,27 +36,30 @@
             <div class="stripe"></div>
             <div class="stripe"></div>
         </div>
+    </div>
 
-        <div id="container">
-            <div id="wrapper">
+    <div id="container">
+        <div class="wrapper">
+            <div id="content">
                 <h1 id="title">
-                    <span id="word">{{ word }}</span>
+                    <span id="word"></span>
                     <span id="type"></span>
                 </h1>
-                <p id="definition">{{ definition }}</p>
+                <p id="definition"></p>
             </div>
             <div id="controls">
-                <button
-                        id="next"
-                        onclick="getRandom()">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.229 13.229"><path d="M4.808.813a.265.265 0 0 0-.265.264v1.588a.265.265 0 1 0 .53 0V1.077a.265.265 0 0 0-.265-.264zm-2.642.268a.265.265 0 0 0-.187.452L3.037 2.59a.265.265 0 1 0 .374-.374L2.353 1.158a.264.264 0 0 0-.187-.077zm8.341.26a1.306 1.306 0 0 0-.515.101L7.186 2.605a1.326 1.326 0 0 0-.717 1.729l1.163 2.805a1.327 1.327 0 0 0 1.729.717l2.806-1.163a1.326 1.326 0 0 0 .716-1.729L11.721 2.16a1.327 1.327 0 0 0-1.214-.817zm0 .528c.309 0 .598.184.725.492l1.162 2.806a.786.786 0 0 1-.43 1.037L9.159 7.367a.787.787 0 0 1-1.038-.43L6.96 4.13a.786.786 0 0 1 .43-1.037l2.806-1.163a.808.808 0 0 1 .311-.062zm-.301 1.06a.397.397 0 0 0-.397.397.397.397 0 0 0 .397.397.397.397 0 0 0 .396-.397.397.397 0 0 0-.396-.397zm-8.308.794a.265.265 0 0 0 0 .53h1.587a.265.265 0 0 0 0-.53zm6.455 0a.397.397 0 0 0-.396.397.397.397 0 0 0 .396.397.397.397 0 0 0 .397-.397.397.397 0 0 0-.397-.397zM11 4.781a.397.397 0 0 0-.397.397.397.397 0 0 0 .397.397.397.397 0 0 0 .397-.397.397.397 0 0 0-.397-.397zm-8.239.53a1.328 1.328 0 0 0-1.214.817L.384 8.933c-.279.673.043 1.45.716 1.73l2.807 1.162a1.327 1.327 0 0 0 1.729-.717l1.162-2.805a1.326 1.326 0 0 0-.716-1.73L3.275 5.412a1.314 1.314 0 0 0-.515-.1zm6.387.264a.397.397 0 0 0-.397.397.397.397 0 0 0 .397.397.397.397 0 0 0 .397-.397.397.397 0 0 0-.397-.397zm-6.386.263c.103 0 .209.02.312.062l2.806 1.163c.41.17.6.626.43 1.037l-1.162 2.806c-.17.41-.627.6-1.038.43l-2.806-1.163a.786.786 0 0 1-.43-1.037L2.035 6.33a.786.786 0 0 1 .726-.492zm.3 1.06a.397.397 0 0 0-.396.397.397.397 0 0 0 .397.397.397.397 0 0 0 .397-.397.397.397 0 0 0-.397-.397zm1.853.794a.397.397 0 0 0-.397.397.397.397 0 0 0 .397.397.397.397 0 0 0 .397-.397.397.397 0 0 0-.397-.397zM2.268 8.75a.397.397 0 0 0-.397.397.397.397 0 0 0 .397.397.397.397 0 0 0 .397-.397.397.397 0 0 0-.397-.397zm7.302.265a.268.268 0 0 0-.264.264c0 .146.118.265.264.265h1.588a.265.265 0 0 0 0-.53zm-5.45.529a.397.397 0 0 0-.397.397.397.397 0 0 0 .397.397.397.397 0 0 0 .397-.397.397.397 0 0 0-.397-.397zm4.127.794a.268.268 0 0 0-.264.264v1.588a.265.265 0 1 0 .53 0v-1.588a.265.265 0 0 0-.266-.264zm1.592.268a.264.264 0 0 0-.19.447h-.001l.004.005 1.054 1.055a.27.27 0 0 0 .378.004.269.269 0 0 0-.004-.378l-1.054-1.055-.004-.004a.264.264 0 0 0-.183-.074z" style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;isolation:auto;mix-blend-mode:normal;marker:none" color="#000" font-weight="400" overflow="visible" fill-rule="evenodd"/></svg>
-                </button>
+                <div id="next">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 13.229 13.229"
+                    ><path d="M4.808.813a.265.265 0 0 0-.265.264v1.588a.265.265 0 1 0 .53 0V1.077a.265.265 0 0 0-.265-.264zm-2.642.268a.265.265 0 0 0-.187.452L3.037 2.59a.265.265 0 1 0 .374-.374L2.353 1.158a.264.264 0 0 0-.187-.077zm8.341.26a1.306 1.306 0 0 0-.515.101L7.186 2.605a1.326 1.326 0 0 0-.717 1.729l1.163 2.805a1.327 1.327 0 0 0 1.729.717l2.806-1.163a1.326 1.326 0 0 0 .716-1.729L11.721 2.16a1.327 1.327 0 0 0-1.214-.817zm0 .528c.309 0 .598.184.725.492l1.162 2.806a.786.786 0 0 1-.43 1.037L9.159 7.367a.787.787 0 0 1-1.038-.43L6.96 4.13a.786.786 0 0 1 .43-1.037l2.806-1.163a.808.808 0 0 1 .311-.062zm-.301 1.06a.397.397 0 0 0-.397.397.397.397 0 0 0 .397.397.397.397 0 0 0 .396-.397.397.397 0 0 0-.396-.397zm-8.308.794a.265.265 0 0 0 0 .53h1.587a.265.265 0 0 0 0-.53zm6.455 0a.397.397 0 0 0-.396.397.397.397 0 0 0 .396.397.397.397 0 0 0 .397-.397.397.397 0 0 0-.397-.397zM11 4.781a.397.397 0 0 0-.397.397.397.397 0 0 0 .397.397.397.397 0 0 0 .397-.397.397.397 0 0 0-.397-.397zm-8.239.53a1.328 1.328 0 0 0-1.214.817L.384 8.933c-.279.673.043 1.45.716 1.73l2.807 1.162a1.327 1.327 0 0 0 1.729-.717l1.162-2.805a1.326 1.326 0 0 0-.716-1.73L3.275 5.412a1.314 1.314 0 0 0-.515-.1zm6.387.264a.397.397 0 0 0-.397.397.397.397 0 0 0 .397.397.397.397 0 0 0 .397-.397.397.397 0 0 0-.397-.397zm-6.386.263c.103 0 .209.02.312.062l2.806 1.163c.41.17.6.626.43 1.037l-1.162 2.806c-.17.41-.627.6-1.038.43l-2.806-1.163a.786.786 0 0 1-.43-1.037L2.035 6.33a.786.786 0 0 1 .726-.492zm.3 1.06a.397.397 0 0 0-.396.397.397.397 0 0 0 .397.397.397.397 0 0 0 .397-.397.397.397 0 0 0-.397-.397zm1.853.794a.397.397 0 0 0-.397.397.397.397 0 0 0 .397.397.397.397 0 0 0 .397-.397.397.397 0 0 0-.397-.397zM2.268 8.75a.397.397 0 0 0-.397.397.397.397 0 0 0 .397.397.397.397 0 0 0 .397-.397.397.397 0 0 0-.397-.397zm7.302.265a.268.268 0 0 0-.264.264c0 .146.118.265.264.265h1.588a.265.265 0 0 0 0-.53zm-5.45.529a.397.397 0 0 0-.397.397.397.397 0 0 0 .397.397.397.397 0 0 0 .397-.397.397.397 0 0 0-.397-.397zm4.127.794a.268.268 0 0 0-.264.264v1.588a.265.265 0 1 0 .53 0v-1.588a.265.265 0 0 0-.266-.264zm1.592.268a.264.264 0 0 0-.19.447h-.001l.004.005 1.054 1.055a.27.27 0 0 0 .378.004.269.269 0 0 0-.004-.378l-1.054-1.055-.004-.004a.264.264 0 0 0-.183-.074z" style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;isolation:auto;mix-blend-mode:normal;marker:none" color="#000" font-weight="400" overflow="visible" fill-rule="evenodd"/></svg>
+                </div>
             </div>
         </div>
+    </div>
 
 
-        <!--  SCRIPTS -->
-        <script src="https://unpkg.com/popmotion/dist/popmotion.global.min.js"></script>
-        <script src="assets/scripts.js"></script>
-    </body>
+    <!--  SCRIPTS -->
+    <script src="https://unpkg.com/popmotion/dist/popmotion.global.min.js"></script>
+    <script src="assets/scripts.js"></script>
+</body>
 </html>
