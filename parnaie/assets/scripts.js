@@ -87,7 +87,7 @@ function removeStripes () {
 }
 
 // Animate
-function animateContent () {
+function animateContent (data) {
   addStripes()
 
   // Move stripes
@@ -101,8 +101,14 @@ function animateContent () {
   }).start({
     update: wrapperStyler.set,
     complete: () => {
+      updateDef(data)
+
+      // Finish animation
       removeStripes()
       wrapperStyler.set('y', 0)
+
+      // Mark ready
+      state.status = 'ok'
     }
   })
 }
@@ -112,8 +118,14 @@ let reqNext = new XMLHttpRequest()
 
 reqNext.onload = function() {
   if (reqNext.status >= 200 && reqNext.status < 400) {
-    // Success!
-    updateDef(JSON.parse(reqNext.responseText))
+    state.status = 'busy'
+    let diceInstance = diceAnim.start({
+      update: dice.set,
+      complete: () => {
+        // Start animations
+        animateContent(JSON.parse(reqNext.responseText))
+      }
+    })
   } else {
     console.log('Server error')
   }
@@ -124,8 +136,10 @@ reqNext.onerror = function() {
 }
 
 let getNext = function () {
-  reqNext.open('GET', '/random', true)
-  reqNext.send()
+  if (state.status === 'ok') {
+    reqNext.open('GET', '/random', true)
+    reqNext.send()
+  }
 }
 
 
