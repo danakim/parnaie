@@ -15,4 +15,4 @@ Poate fi pornita cu:
 
 Baza de date poate fi populata cu:
 
-`cd data && ./split-data.sh && ./insert-data.sh`
+`cd data && cat data.txt | redis-cli`
