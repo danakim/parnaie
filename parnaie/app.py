@@ -25,7 +25,8 @@ def create_app():
         else:
             key = id
 
-        item = { 
+        item = {
+            "id": key,
             "word": r.hget(key, 'word'),
             "props": [
                 r.hget(key, 'prop0'), r.hget(key, 'prop1'),
