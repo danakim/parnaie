@@ -7,7 +7,7 @@ const nodes = {
   type: document.getElementById('type'),
   def: document.getElementById('definition'),
   dice: document.getElementById('next')
-};
+}
 
 const stripesToMove = 5
 let stripeH = document.querySelector('.stripe').offsetHeight
@@ -50,7 +50,7 @@ function updateDef (obj) {
 
   // Definition
   while (nodes.def.hasChildNodes()) {
-    nodes.def.removeChild(nodes.def.lastChild);
+    nodes.def.removeChild(nodes.def.lastChild)
   }
   for (let i of obj.defs) {
     if (i.length > 0) {
@@ -82,7 +82,7 @@ function removeStripes () {
   let outgoing = nodes.wrapper.children
 
   for (let i = 0; i < stripesToMove; i++) {
-    nodes.wrapper.removeChild(outgoing[i]);
+    nodes.wrapper.removeChild(outgoing[i])
   }
 }
 
@@ -107,39 +107,31 @@ function animateContent () {
   })
 }
 
-// Update render with a random definition
-// Mimic an ajax call
-function getRandom () {
-  if (state.status === 'ok') {
-    // Mark busy and update dice
-    state.status = 'busy'
-    let diceInstance = diceAnim.start({
-      update: dice.set,
-      complete: () => {
-        // Trigger fake ajax get and update with response
-        let time = Math.floor(Math.random() * 1000)
-        let newData = {
-          word: randEl(data.words),
-          type: randEl(data.types),
-          def: randEl(data.defs)
-        }
+// GET next word
+let reqNext = new XMLHttpRequest()
 
-        setTimeout(() => {
-          updateDef(newData)
-
-          // Start animations
-          animateContent()
-
-          // Mark ready
-          state.status = 'ok'
-        }, time)
-      }
-    })
+reqNext.onload = function() {
+  if (reqNext.status >= 200 && reqNext.status < 400) {
+    // Success!
+    updateDef(JSON.parse(reqNext.responseText))
+  } else {
+    console.log('Server error')
   }
 }
+
+reqNext.onerror = function() {
+  console.log('Connection error')
+}
+
+let getNext = function () {
+  reqNext.open('GET', '/random', true)
+  reqNext.send()
+}
+
+
 
 // Document Ready --------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function(event) { 
   updateDef(state.current)
-  nodes.dice.onclick = getRandom
-});
+  nodes.dice.onclick = getNext
+})
