@@ -17,8 +17,14 @@ def create_app():
     app.config.from_pyfile('settings.py', silent=True)
     r = redis.StrictRedis(host='parnaie_redis_1', port=6379)
 
-    def getItem ():
-        key = r.randomkey()
+    def getItem (id=None):
+        key = None
+
+        if 'id':
+            key = id
+        else:
+            key = r.randomkey()
+
         item = { 
             "word": r.hget(key, 'word'),
             "props": [
@@ -39,6 +45,13 @@ def create_app():
         return render_template(
         'index.html',
         wordObj = json.dumps(getItem())
+        )
+
+    @app.route('/<id>')
+    def displayId(id):
+        return render_template(
+        'index.html',
+        wordObj = json.dumps(getItem(id))
         )
 
     @app.route('/despre')
