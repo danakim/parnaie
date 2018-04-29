@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory, request
 import redis
 import json
 import sys
@@ -50,5 +50,10 @@ def create_app():
     @app.route('/assets/<path:path>')
     def send_assets(path):
         return send_from_directory('assets', path)
+
+    @app.route('/random', methods=['GET'])
+    def random():
+            item = getItem()
+            return json.dumps(item)
 
     return app
