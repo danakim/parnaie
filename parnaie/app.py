@@ -20,10 +20,10 @@ def create_app():
     def getItem (id=None):
         key = None
 
-        if 'id':
-            key = id
-        else:
+        if id is None:
             key = r.randomkey()
+        else:
+            key = id
 
         item = { 
             "word": r.hget(key, 'word'),
