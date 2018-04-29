@@ -67,7 +67,12 @@ def create_app():
 
     @app.route('/random', methods=['GET'])
     def random():
-            item = getItem()
-            return json.dumps(item)
+        item = getItem()
+        return json.dumps(item)
+
+    @app.route('/word/<int:id>', methods=['GET'])
+    def word(id):
+        item = getItem(id)
+        return json.dumps(item)
 
     return app
