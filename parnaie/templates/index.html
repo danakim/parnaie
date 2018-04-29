@@ -45,7 +45,7 @@
                     <span id="word"></span>
                     <span id="type"></span>
                 </h1>
-                <p id="definition"></p>
+                <ul id="definition"></ul>
             </div>
             <div id="controls">
                 <div id="next">
@@ -59,6 +59,12 @@
 
 
     <!--  SCRIPTS -->
+    <script type="text/javascript">
+        let state = {
+            current: {{ wordObj | safe}},
+            status: 'ok'
+        }
+    </script>
     <script src="https://unpkg.com/popmotion/dist/popmotion.global.min.js"></script>
     <script src="assets/scripts.js"></script>
 </body>

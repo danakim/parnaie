@@ -8,30 +8,6 @@ const nodes = {
   def: document.getElementById('definition'),
   dice: document.getElementById('next')
 };
-// Data
-const data = {
-  words: ['poraliu, poralii', 'verzişor, verzişori', 'părui, păruiesc', 'brichetar, brichetari',
-          'chitros, chitroşi', 'mătrăşi, mătrăşesc', 'baracă, barăci', 'diamant, diamante',
-          'radio tam-tam', 'urechist, urechişti'],
-  types: ['s.m.', 'adj', 'adv', 's.f.', 's.m. v.', 'vb.', 's.n.', 'expr.'],
-  defs: [
-    'ofiţer.',
-    'verdeaţă.',
-    'a (se) bate.',
-    'instigator.',
-    'cârnăţar.',
-    '1. a trăda pe cineva prin mijloace necinstite. 2. a ucide.',
-    '1. cameră de deţinere într-o construcţie provizorie din scândură. 2. cameră mare de deţinere cu zeci de deţinuţi.',
-    '1. deţinut descurcăreţ care se adaptează repede la orice situaţie. 2. deţinut care iese mereu cu un câştig din combinaţiile pe care le face.',
-    'deţinut bine informat cu evenimentele din',
-    'umplutură.'
-  ]
-}
-
-let state = {
-  current: {},
-  status: 'ok'
-}
 
 const stripesToMove = 5
 let stripeH = document.querySelector('.stripe').offsetHeight
@@ -64,8 +40,27 @@ let diceAnim = popmotion.tween({
 // Update html text
 function updateDef (obj) {
   nodes.word.innerText = obj.word
-  nodes.type.innerText = obj.type
-  nodes.def.innerText = obj.def
+
+  // Type
+  let type = ''
+  for (let i in obj.props) {
+    type += obj.props[i] + ' '
+  }
+  nodes.type.innerText = type
+
+  // Definition
+  while (nodes.def.hasChildNodes()) {
+    nodes.def.removeChild(nodes.def.lastChild);
+  }
+  for (let i of obj.defs) {
+    if (i.length > 0) {
+      let elem = document.createElement('li')
+      let text = document.createTextNode(i)
+      elem.appendChild(text)
+      nodes.def.appendChild(elem)
+    }
+  }
+
   state.current = obj
 }
 
@@ -144,6 +139,7 @@ function getRandom () {
 }
 
 // Document Ready --------------------------------------------------------------
-(function () {
+document.addEventListener("DOMContentLoaded", function(event) { 
+  updateDef(state.current)
   nodes.dice.onclick = getRandom
-}())
+});
