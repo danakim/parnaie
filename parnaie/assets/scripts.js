@@ -2,6 +2,7 @@
 const nodes = {
   container: document.getElementById('container'),
   wrapper: document.querySelector('#stripe-holder .wrapper'),
+  content: document.getElementById('content'),
   title: document.getElementById('title'),
   word: document.getElementById('word'),
   type: document.getElementById('type'),
@@ -18,6 +19,9 @@ const textEls = Array
   .map(popmotion.styler)
 
 const wrapperStyler = popmotion.styler(nodes.wrapper)
+const contentStyler = popmotion.styler(nodes.content)
+const titleStyler = popmotion.styler(nodes.title)
+const defStyler = popmotion.styler(nodes.def)
 const dice = popmotion.styler(nodes.dice)
 
 let diceAnim = popmotion.tween({
@@ -64,10 +68,6 @@ function updateDef (obj) {
   state.current = obj
 }
 
-// Random array element
-function randEl (arr) {
-  return arr[Math.floor(Math.random() * arr.length)]
-}
 // Add stripes
 function addStripes () {
   for (let i = 0; i < stripesToMove; i++) {
@@ -90,27 +90,56 @@ function removeStripes () {
 function animateContent (data) {
   addStripes()
 
-  // Move stripes
-  popmotion.spring({
-    from: 0,
-    velocity: 300,
-    to: { y: -(4 * stripeH) + 1 },
-    stiffness: 150,
-    mass: 1,
-    damping: 30
-  }).start({
-    update: wrapperStyler.set,
-    complete: () => {
+  const setStylers = function (v) {
+    if (v.posY.y === 0) {
       updateDef(data)
+    }
 
-      // Finish animation
+    contentStyler.set(v.posY)
+    wrapperStyler.set(v.stripesY)
+  }
+
+  popmotion.timeline([
+    {
+      track: 'posY',
+      from: { y: 0, opacity: 1 },
+      to: { y: -(2 * stripeH), opacity: 0 },
+      duration: 300,
+      ease: {y: popmotion.easing.easeIn, opacity: popmotion.easing.circOut}
+    },
+    '-600',
+    {
+      track: 'stripesY',
+      from: { y: 0 },
+      to: { y: -(2 * stripeH) - 1},
+      duration: 1000,
+      ease: popmotion.easing.backInOut
+    },
+    {
+      track: 'posY',
+      from: { y: titleStyler.get().translateY, opacity: 0 },
+      to: { y: (4 * stripeH), opacity: 0 },
+      ease: popmotion.easing.easeIn,
+      duration: 200
+    },
+    {
+      track: 'posY',
+      from: { y: titleStyler.get().translateY, opacity: 0 },
+      to: { y: 0, opacity: 1 },
+      duration: 200,
+      ease: popmotion.easing.easeIn
+    },
+  ]).start({
+    update: setStylers,
+    complete: () => {
       removeStripes()
       wrapperStyler.set('y', 0)
-
-      // Mark ready
-      state.status = 'ok'
+      window.history.pushState(data.id, null, "/" + data.id)
     }
   })
+
+  // Mark ready
+  state.status = 'ok'
 }
 
 // GET next word
