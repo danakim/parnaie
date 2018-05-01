@@ -34,8 +34,7 @@ def create_app():
             ],
             "defs": [
                 r.hget(key, 'def0'), r.hget(key, 'def1'), r.hget(key, 'def2'),
-                r.hget(key, 'def3'), r.hget(key, 'def4'), r.hget(key, 'def5'),
-                r.hget(key, 'def6')
+                r.hget(key, 'def3'), r.hget(key, 'def4'), r.hget(key, 'def5')
             ]
         }
         return item;
