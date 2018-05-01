@@ -115,6 +115,7 @@ function animateContent (data) {
       duration: 1000,
       ease: popmotion.easing.backInOut
     },
+    '-1000',
     {
       track: 'posY',
       from: { y: titleStyler.get().translateY, opacity: 0 },
@@ -122,6 +123,7 @@ function animateContent (data) {
       ease: popmotion.easing.easeIn,
       duration: 200
     },
+    '200',
     {
       track: 'posY',
       from: { y: titleStyler.get().translateY, opacity: 0 },
@@ -135,11 +137,10 @@ function animateContent (data) {
       removeStripes()
       wrapperStyler.set('y', 0)
       window.history.pushState(data.id, null, "/" + data.id)
+      // Mark ready
+      state.status = 'ok'
     }
   })
-
-  // Mark ready
-  state.status = 'ok'
 }
 
 // GET next word
