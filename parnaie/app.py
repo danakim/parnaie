@@ -26,13 +26,13 @@ def create_app():
             key = id
 
         item = {
-            "id": key,
-            "word": r.hget(key, 'word'),
-            "props": [
+            'id': key,
+            'word': r.hget(key, 'word'),
+            'props': [
                 r.hget(key, 'prop0'), r.hget(key, 'prop1'),
                 r.hget(key, 'prop2'), r.hget(key, 'prop3')
             ],
-            "defs": [
+            'defs': [
                 r.hget(key, 'def0'), r.hget(key, 'def1'), r.hget(key, 'def2'),
                 r.hget(key, 'def3'), r.hget(key, 'def4'), r.hget(key, 'def5')
             ]
@@ -41,16 +41,29 @@ def create_app():
 
     @app.route('/')
     def index():
-        key = r.randomkey()
+        obj = getItem()
+        props = ''
+        for prop in obj['props']:
+            props += ' ' + prop
         return render_template(
         'index.html',
-        wordObj = json.dumps(getItem())
+        title=obj['word'],
+        defs=obj['defs'],
+        props=props,
+        wordObj=json.dumps(obj)
         )
 
     @app.route('/<id>')
     def displayId(id):
+        obj = getItem(id)
+        props = ''
+        for prop in obj['props']:
+            props += ' ' + prop
         return render_template(
         'index.html',
+        title=obj['word'],
+        defs=obj['defs'],
+        props=props,
         wordObj = json.dumps(getItem(id))
         )
 

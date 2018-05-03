@@ -175,7 +175,6 @@ let getNext = function () {
 
 
 // Document Ready --------------------------------------------------------------
-document.addEventListener("DOMContentLoaded", function(event) { 
-  updateDef(state.current)
+document.addEventListener("DOMContentLoaded", function(event) {
   nodes.dice.onclick = getNext
 })

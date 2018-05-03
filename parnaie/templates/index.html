@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dicționar de pușcărie - {{ pageTitle }}</title>
+    <title>Dicționar de pușcărie - {{title|safe}} </title>
     <meta name="description" content="Dicționar cu expresii folosite în închisoare">
     <meta name="keywords" content="dicționar, dictionar, pușcărie, puscarie, inchisoare, închisoare, parnaie, pârnaie, zdub, bulau">
     <meta charset='utf-8'>
@@ -42,10 +42,14 @@
         <div class="wrapper">
             <div id="content">
                 <h1 id="title">
-                    <span id="word"></span>
-                    <span id="type"></span>
+                    <span id="word">{{title|safe}}</span>
+                    <span id="type">{{props|safe}}</span>
                 </h1>
-                <ul id="definition"></ul>
+                <ul id="definition">
+                    {% for def in defs %}
+                        <li>{{def}}</li>
+                    {% endfor %}
+                </ul>
             </div>
             <div id="controls">
                 <div id="next">
