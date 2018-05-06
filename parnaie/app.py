@@ -67,12 +67,6 @@ def create_app():
         wordObj = json.dumps(getItem(id))
         )
 
-    @app.route('/despre')
-    def despre():
-        return render_template(
-        'despre.html',
-        )
-
     @app.route('/assets/<path:path>')
     def send_assets(path):
         return send_from_directory('assets', path)
