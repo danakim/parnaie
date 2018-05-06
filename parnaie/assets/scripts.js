@@ -7,7 +7,9 @@ const nodes = {
   word: document.getElementById('word'),
   type: document.getElementById('type'),
   def: document.getElementById('definition'),
-  dice: document.getElementById('next')
+  dice: document.getElementById('next'),
+  aboutBtn: document.getElementById('about-bttn'),
+  aboutContent:document.getElementById('about-content')
 }
 
 const stripesToMove = 5
@@ -136,7 +138,7 @@ function animateContent (data) {
     complete: () => {
       removeStripes()
       wrapperStyler.set('y', 0)
-      window.history.pushState(data.id, null, "/" + data.id)
+      window.history.pushState(data.id, null, '/' + data.id)
       // Mark ready
       state.status = 'ok'
     }
@@ -172,9 +174,17 @@ let getNext = function () {
   }
 }
 
-
+let toggleAbout = function () {
+  nodes.aboutContent.classList.toggle('invisible')
+  nodes.aboutContent.classList.toggle('visible')
+  nodes.aboutContent.onclick = (function () {
+    nodes.aboutContent.classList.toggle('visible')
+  nodes.aboutContent.classList.toggle('invisible')
+  })
+}
 
 // Document Ready --------------------------------------------------------------
-document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener('DOMContentLoaded', function(event) {
   nodes.dice.onclick = getNext
+  nodes.aboutBtn.onclick = toggleAbout
 })
