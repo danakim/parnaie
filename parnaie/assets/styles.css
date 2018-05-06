@@ -371,10 +371,6 @@ body {
   height: 100vh;
 }
 
-#stripe-holder .wrapper {
-
-}
-
 .stripe:nth-child(odd) {
   background-color: #18181B;
 }
@@ -420,6 +416,36 @@ body {
   #container .wrapper {
     padding: 0 1rem;
   }
+}
+
+.popup {
+  font-family: 'Open Sans', sans-serif;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #fffcfa;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.popup.visible {
+  z-index: 10;
+  opacity: 1;
+}
+
+.popup.invisible {
+  opacity: 0;
+}
+
+.popup div {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  align-content: center;
+}
+
+.popup div > *{
+  padding: 1rem;
 }
 
 #content {
@@ -492,12 +518,30 @@ body {
 }
 
 #next svg{
-  width: 3.2rem;
-  height: 3.2rem;
+  width: 3.5rem;
   transition: all 0.3s ease-in-out;
   display: flex;
 }
 
 #next:hover svg{
   fill: #d81c23;
+}
+
+.side-btn {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-content: center;
+  cursor: pointer;
+}
+
+.side-btn:hover svg{
+  fill: #000000;
+}
+.side-btn svg {
+  width: 2rem;
+  fill: #4f4e4e;
+  transition: all 0.3s ease-in-out;
 }
