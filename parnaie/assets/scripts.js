@@ -9,7 +9,13 @@ const nodes = {
   def: document.getElementById('definition'),
   dice: document.getElementById('next'),
   aboutBtn: document.getElementById('about-bttn'),
-  aboutContent:document.getElementById('about-content')
+  aboutContent:document.getElementById('about-content'),
+  shareBtn: document.getElementById('share-bttn'),
+  shareContent:document.getElementById('share-content'),
+  shareWord: document.getElementById('share-word'),
+  fbLink: document.getElementById('fb-link'),
+  twLink: document.getElementById('tw-link'),
+  gpLink: document.getElementById('gp-link')
 }
 
 const stripesToMove = 5
@@ -45,7 +51,13 @@ let diceAnim = popmotion.tween({
 // Logic -----------------------------------------------------------------------
 // Update html text
 function updateDef (obj) {
+  if (obj.id === state.current.id) {
+    return
+  }
+
+  document.title = 'Dicționar de pușcărie - ' + obj.word
   nodes.word.innerText = obj.word
+  nodes.shareWord.innerText = obj.word
 
   // Type
   let type = ''
@@ -68,6 +80,7 @@ function updateDef (obj) {
   }
 
   state.current = obj
+  updateShareInfo()
 }
 
 // Add stripes
@@ -93,7 +106,7 @@ function animateContent (data) {
   addStripes()
 
   const setStylers = function (v) {
-    if (v.posY.y === 0) {
+    if (v.posY.y === 0 && data.id !== state.current.id) {
       updateDef(data)
     }
 
@@ -183,8 +196,28 @@ let toggleAbout = function () {
   })
 }
 
+let toggleShare = function () {
+  nodes.shareContent.classList.toggle('invisible')
+  nodes.shareContent.classList.toggle('visible')
+  nodes.shareContent.onclick = (function () {
+    nodes.shareContent.classList.toggle('visible')
+  nodes.shareContent.classList.toggle('invisible')
+  })
+}
+
+let updateShareInfo = function () {
+  let link = 'http://' + window.location.host + '/' + state.current.id
+
+  nodes.fbLink.setAttribute('href', 'https://facebook.com/sharer/sharer.php?u=' + link)
+  nodes.twLink.setAttribute('href', 'https://twitter.com/intent/tweet/?text=Dictionar%20de%20puscarie%20-%20' + state.current.word + '&amp;url=' + link)
+  nodes.gpLink.setAttribute('href', 'https://plus.google.com/share?url=' + link)
+
+  // Update FB og tags
+}
+
 // Document Ready --------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', function(event) {
   nodes.dice.onclick = getNext
   nodes.aboutBtn.onclick = toggleAbout
+  nodes.shareBtn.onclick = toggleShare
 })
