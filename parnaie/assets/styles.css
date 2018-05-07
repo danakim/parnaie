@@ -652,10 +652,12 @@ body {
 
 #about-content {
   opacity: 0;
+  transform: scaleY(0);
 }
 
 #share-content {
   opacity: 0;
+  transform: scaleY(0);
 }
 
 #content {

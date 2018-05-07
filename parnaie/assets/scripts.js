@@ -221,8 +221,8 @@ let toggleAbout = function () {
       '-100',
       {
         track: 'about',
-        from: { y: +64, opacity: 0},
-        to: { y: 0, opacity: 1},
+        from: { y: +64, opacity: 0, scaleY: 0},
+        to: { y: 0, opacity: 1, scaleY: 1},
         duration: 400,
         ease: popmotion.easing.backInOut
       }
@@ -250,8 +250,8 @@ let toggleShare = function () {
       '-100',
       {
         track: 'share',
-        from: { y: +64, opacity: 0},
-        to: { y: 0, opacity: 1},
+        from: { y: +64, opacity: 0, scaleY: 0},
+        to: { y: 0, opacity: 1, scaleY: 1},
         duration: 400,
         ease: popmotion.easing.backInOut
       }
@@ -268,16 +268,16 @@ let closeModal = function () {
   popmotion.timeline([
   {
     track: 'share',
-    from: { y: 0, opacity: shareStyler.get().opacity},
-    to: { y: +64, opacity: 0},
+    from: { y: 0, opacity: shareStyler.get().opacity, scaleY: shareStyler.get().scaleY},
+    to: { y: +64, opacity: 0, scaleY: 0},
     duration: 400,
     ease: popmotion.easing.backInOut
   },
   '-400',
   {
     track: 'about',
-    from: { y: 0, opacity: aboutStyler.get().opacity},
-    to: { y: +64, opacity: 0},
+    from: { y: 0, opacity: aboutStyler.get().opacity, aboutStyler: shareStyler.get().scaleY},
+    to: { y: +64, opacity: 0, scaleY: 0},
     duration: 400,
     ease: popmotion.easing.backInOut
   },
