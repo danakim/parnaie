@@ -8,6 +8,7 @@ const nodes = {
   type: document.getElementById('type'),
   def: document.getElementById('definition'),
   dice: document.getElementById('next'),
+  modal: document.getElementById('modal'),
   aboutBtn: document.getElementById('about-bttn'),
   aboutContent:document.getElementById('about-content'),
   shareBtn: document.getElementById('share-bttn'),
@@ -31,7 +32,20 @@ const contentStyler = popmotion.styler(nodes.content)
 const titleStyler = popmotion.styler(nodes.title)
 const defStyler = popmotion.styler(nodes.def)
 const dice = popmotion.styler(nodes.dice)
+const modalStyler = popmotion.styler(nodes.modal)
+const shareStyler = popmotion.styler(nodes.shareBtn)
+const aboutStyler = popmotion.styler(nodes.aboutBtn)
+const shareContentStyler = popmotion.styler(nodes.shareContent)
+const aboutContentStyler = popmotion.styler(nodes.aboutContent)
 
+
+const setModalStylers = function (v) {
+    modalStyler.set(v.modal)
+    aboutContentStyler.set(v.about)
+    shareContentStyler.set(v.share)
+}
+
+// Animations
 let diceAnim = popmotion.tween({
   from: {
     rotate: 0,
@@ -45,7 +59,12 @@ let diceAnim = popmotion.tween({
   ease: popmotion.easing.anticipate
 })
 
-
+let btnsAnim = popmotion.tween({
+  from: { borderColor: 'rgba(216, 28, 35, 0.3)' },
+  to: { borderColor: 'rgba(255, 252, 250, 0)' },
+  duration: 600,
+  ease: popmotion.easing.anticipate
+})
 
 
 // Logic -----------------------------------------------------------------------
@@ -188,20 +207,90 @@ let getNext = function () {
 }
 
 let toggleAbout = function () {
-  nodes.aboutContent.classList.toggle('invisible')
-  nodes.aboutContent.classList.toggle('visible')
-  nodes.aboutContent.onclick = (function () {
-    nodes.aboutContent.classList.toggle('visible')
-  nodes.aboutContent.classList.toggle('invisible')
+  btnsAnim.start({
+    update: aboutStyler.set,
+    complete: () => {
+      popmotion.timeline([
+      {
+        track: 'modal',
+        from: { y: +32, opacity: 0, scaleY: 0},
+        to: { y: 0, opacity: 1, scaleY: 1},
+        duration: 250,
+        ease: popmotion.easing.easeInOut
+      },
+      '-100',
+      {
+        track: 'about',
+        from: { y: +64, opacity: 0},
+        to: { y: 0, opacity: 1},
+        duration: 400,
+        ease: popmotion.easing.backInOut
+      }
+      ]).start({
+        update: setModalStylers,
+        complete: () => {
+        }
+      })
+    }
   })
 }
 
 let toggleShare = function () {
-  nodes.shareContent.classList.toggle('invisible')
-  nodes.shareContent.classList.toggle('visible')
-  nodes.shareContent.onclick = (function () {
-    nodes.shareContent.classList.toggle('visible')
-  nodes.shareContent.classList.toggle('invisible')
+  btnsAnim.start({
+    update: shareStyler.set,
+    complete: () => {
+      popmotion.timeline([
+      {
+        track: 'modal',
+        from: { y: +32, opacity: 0, scaleY: 0},
+        to: { y: 0, opacity: 1, scaleY: 1},
+        duration: 250,
+        ease: popmotion.easing.easeInOut
+      },
+      '-100',
+      {
+        track: 'share',
+        from: { y: +64, opacity: 0},
+        to: { y: 0, opacity: 1},
+        duration: 400,
+        ease: popmotion.easing.backInOut
+      }
+      ]).start({
+        update: setModalStylers,
+        complete: () => {
+        }
+      })
+    }
+  })
+}
+
+let closeModal = function () {
+  popmotion.timeline([
+  {
+    track: 'share',
+    from: { y: 0, opacity: shareStyler.get().opacity},
+    to: { y: +64, opacity: 0},
+    duration: 400,
+    ease: popmotion.easing.backInOut
+  },
+  '-400',
+  {
+    track: 'about',
+    from: { y: 0, opacity: aboutStyler.get().opacity},
+    to: { y: +64, opacity: 0},
+    duration: 400,
+    ease: popmotion.easing.backInOut
+  },
+  '-200',
+  {
+    track: 'modal',
+    from: { y: 0, opacity: 1, scaleY: 1},
+    to: { y: 32, opacity: 0, scaleY: 0},
+    duration: 250,
+    ease: popmotion.easing.easeInOut
+  },
+  ]).start({
+    update: setModalStylers
   })
 }
 
@@ -218,4 +307,5 @@ document.addEventListener('DOMContentLoaded', function(event) {
   nodes.dice.onclick = getNext
   nodes.aboutBtn.onclick = toggleAbout
   nodes.shareBtn.onclick = toggleShare
+  nodes.modal.onclick = closeModal
 })
