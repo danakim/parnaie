@@ -211,8 +211,6 @@ let updateShareInfo = function () {
   nodes.fbLink.setAttribute('href', 'https://facebook.com/sharer/sharer.php?u=' + link)
   nodes.twLink.setAttribute('href', 'https://twitter.com/intent/tweet/?text=Dictionar%20de%20puscarie%20-%20' + state.current.word + '&amp;url=' + link)
   nodes.gpLink.setAttribute('href', 'https://plus.google.com/share?url=' + link)
-
-  // Update FB og tags
 }
 
 // Document Ready --------------------------------------------------------------
