@@ -15,6 +15,7 @@ def create_app():
 
     app.config.from_object('config.settings')
     app.config.from_pyfile('settings.py', silent=True)
+    appUrl = 'https://parnaie.xyz'
     r = redis.StrictRedis(host='parnaie_redis_1', port=6379)
 
     def getItem (id=None):
@@ -50,7 +51,9 @@ def create_app():
         title=obj['word'],
         defs=obj['defs'],
         props=props,
-        wordObj=json.dumps(obj)
+        wordObj=json.dumps(obj),
+        appUrl=appUrl,
+        wordId=obj['id']
         )
 
     @app.route('/<id>')
@@ -64,7 +67,9 @@ def create_app():
         title=obj['word'],
         defs=obj['defs'],
         props=props,
-        wordObj = json.dumps(getItem(id))
+        wordObj = json.dumps(getItem(id)),
+        appUrl=appUrl,
+        wordId=obj['id']
         )
 
     @app.route('/assets/<path:path>')
