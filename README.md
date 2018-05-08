@@ -4,6 +4,8 @@
 
 > Bazat pe cartea lui Viorel Horea Tantas - ["Dicţionar de puşcărie"](http://www.google.com/search?q=viorel+horea+tantas+dictionar+de+puscarie&oq=viorel+horea+tantas+dictionar+de+puscarie)
 
+> Vezi proiectul live la [parnaie.xyz](https://parnaie.xyz/)
+
 ## Aplicaţia
 
 Bazată pe Flask, Redis şi Docker. [Parser](https://github.com/treipatru/parnaie-parser) de date scris în Node. Animaţii cu [popmotion](https://popmotion.io).
