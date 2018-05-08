@@ -760,3 +760,12 @@ body {
   fill: #4f4e4e;
   transition: all 0.3s ease-in-out;
 }
+
+input,
+textarea,
+button,
+select,
+a,
+div {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
